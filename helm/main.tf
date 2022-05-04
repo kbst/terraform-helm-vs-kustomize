@@ -6,14 +6,14 @@ resource "kubernetes_namespace" "nginx_ingress" {
 
 module "nginx_ingress" {
   source  = "terraform-module/release/helm"
-  version = "2.6.10"
+  version = "2.7.0"
 
   namespace  = kubernetes_namespace.nginx_ingress.metadata.0.name
-  repository =  "https://kubernetes.github.io/ingress-nginx"
+  repository = "https://kubernetes.github.io/ingress-nginx"
 
   app = {
     name          = "ingress-nginx"
-    version       = "3.33.0"
+    version       = "4.1.0"
     chart         = "ingress-nginx"
     force_update  = true
     wait          = false
@@ -23,7 +23,7 @@ module "nginx_ingress" {
 
   set = [
     {
-      name = "replicaCount"
+      name  = "replicaCount"
       value = 2
     }
   ]
